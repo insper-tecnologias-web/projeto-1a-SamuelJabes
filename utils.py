@@ -1,4 +1,6 @@
 from pathlib import Path
+from database import Database
+from database import Note
 import json
 
 def extract_route(request):
@@ -16,13 +18,12 @@ def read_file(file_path: Path) -> bytes:
     return content
 
 
-def load_data(filename):
-    filepath = "data/"+filename
+def load_data():
+    db = Database('banco')
+
+    notes = db.get_all()
     
-    with open(filepath, 'r') as file:
-        data = json.load(file)
-    
-    return data
+    return notes
 
 def load_template(filename):
     filepath = "templates/"+filename
@@ -41,15 +42,15 @@ def add_annotation_to_notes(titulo, detalhes):
   Returns:
     None.
   """
+  db = Database('banco')
 
-  with open("data/notes.json", "r") as f:
-    notes = json.load(f)
-
+  db.add(Note(title=titulo, content=detalhes))
   
-  notes.append({"titulo": titulo, "detalhes": detalhes})
+#   with open("data/notes.json", "r") as f:
+#     notes = json.load(f)
 
-  with open("data/notes.json", "w") as f:
-    json.dump(notes, f, indent=2)
+#   with open("data/notes.json", "w") as f:
+#     json.dump(notes, f, indent=2)
 
 def build_response(body='', code=200, reason='OK', headers=''):
     if body:
