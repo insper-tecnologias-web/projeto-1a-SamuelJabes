@@ -2,6 +2,9 @@ import socket
 from pathlib import Path
 from utils import extract_route, read_file, build_response
 from views import index
+from database import Database
+
+db = Database('banco')
 
 CUR_DIR = Path(__file__).parent
 SERVER_HOST = '0.0.0.0'
@@ -28,6 +31,10 @@ while True:
         response = build_response() + read_file(filepath)
     elif route == '':
         response = index(request)
+    elif route.startswith("deletar"):
+        id = int(route.split("/")[1])
+        db.delete(id)
+        response = build_response(code=303, reason='See Other', headers='Location: /')
     else:
         response = build_response(code=404, reason='Not Found')
 

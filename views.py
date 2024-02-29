@@ -32,7 +32,7 @@ def index(request):
     
     note_template = load_template('components/note.html')
     notes_li = [
-        note_template.format(title=note.title, details=note.content)
+        note_template.format(title=note.title, details=note.content, id=note.id)
         for note in load_data()
     ]
     notes = '\n'.join(notes_li)
