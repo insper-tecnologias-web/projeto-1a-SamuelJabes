@@ -1,6 +1,6 @@
 import socket
 from pathlib import Path
-from utils import extract_route, read_file, build_response
+from utils import extract_route, read_file, build_response, load_template, load_data
 from views import index
 from database import Database
 
@@ -35,6 +35,15 @@ while True:
         id = int(route.split("/")[1])
         db.delete(id)
         response = build_response(code=303, reason='See Other', headers='Location: /')
+    elif route.startswith("prova"):
+        note_template = load_template('components/note.html')
+        notes_li = [
+            note_template.format(title=note.title, details=note.content, id=note.id)
+            for note in load_data()
+        ]
+        notes = '\n'.join(notes_li)
+        qtd_notes = len(notes_li)
+        response = build_response(body=load_template('page.html').format(qtd_notes=qtd_notes))
     else:
         response = build_response(code=404, reason='Not Found')
 

@@ -25,10 +25,6 @@ def index(request):
         detalhes = params.get('detalhes', '')
         add_annotation_to_notes(titulo, detalhes)  # Adiciona a nova anotação ao arquivo notes.json
         return build_response(code=303, reason='See Other', headers='Location: /')
-
-
-            
-    
     
     note_template = load_template('components/note.html')
     notes_li = [

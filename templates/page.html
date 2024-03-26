@@ -21,29 +21,20 @@
         <img src="img/logo-getit.png" class="logo" />
         <span class="subtitle">Como o Post-it, mas com outro verbo</span>
     </div>
-    <main class="container">
-        <form method="post" class="form-card">
-            <input
-            class="form-card-title"
-            type="text"
-            name="titulo"
-            placeholder="Titulo"
-            id="titulo"
-            />
-            <textarea
-            class="autoresize"
-            name="detalhes"
-            placeholder="Digite o conteudo..."
-            id="detalhes"
-            ></textarea>
-            <button class="btn" type="submit">Criar</button>
-        </form>
 
+    <main class="container">
+    
         <div class="card-container">
-        {notes}
+            <img src="img/simu1a.jpeg" alt="chama">
+        </div>
+    
+        <div>
+            <p>Temos um total de <strong>{qtd_notes}</strong> notas.</p>
         </div>
 
-        <a href="http://127.0.0.1:8080/prova">Ir para o segmento de prova.</a>
+        <a href="http://127.0.0.1:8080/">Voltar para o segmento original</a>
+    </main>
+
     <script type="text/javascript" src="getit.js"></script>
 
 </body>
