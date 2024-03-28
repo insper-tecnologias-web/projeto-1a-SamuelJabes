@@ -45,7 +45,7 @@ while True:
         qtd_notes = len(notes_li)
         response = build_response(body=load_template('page.html').format(qtd_notes=qtd_notes))
     else:
-        response = build_response(code=404, reason='Not Found')
+        response = build_response(body=load_template('404.html'))
 
     client_connection.sendall(response)
 
